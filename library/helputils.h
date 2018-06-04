@@ -2,9 +2,9 @@
 #include "my_container.h"
 #include "book.h"
 
-//----ДОПОЛНИТЕЛЬНЫЕ ПРОЦЕДУРЫ И ФУНКЦИИ
+//----Р”РћРџРћР›РќРРўР•Р›Р¬РќР«Р• РџР РћР¦Р•Р”РЈР Р« Р Р¤РЈРќРљР¦РР
 
-//изменяет строку под Xxxxx
+//РёР·РјРµРЅСЏРµС‚ СЃС‚СЂРѕРєСѓ РїРѕРґ Xxxxx
 void _tolower_str_(string * s)
 {
 	setlocale(LC_ALL, "");
@@ -19,13 +19,13 @@ void _tolower_ch_(char s[40])
 	s[0] = toupper(s[0]);
 }
 
-//печать на экран контейнера
+//РїРµС‡Р°С‚СЊ РЅР° СЌРєСЂР°РЅ РєРѕРЅС‚РµР№РЅРµСЂР°
 template <class T>
 void output_screen(my_container<T> c)
 {
 	for (int i = 0; i < c.size(); i++)
 	{
-		cout << "Запись " << i << endl;
+		cout << "Р—Р°РїРёСЃСЊ " << i << endl;
 		c[i].show_data();
 		cout << endl;
 	}
@@ -36,13 +36,13 @@ void output_full_screen(my_container<T> c)
 {
 	for (int i = 0; i < c.size(); i++)
 	{
-		cout << "Запись " << i << endl;
+		cout << "Р—Р°РїРёСЃСЊ " << i << endl;
 		c[i].show_full_data();
 		cout << endl;
 	}
 }
 
-//свободные
+//СЃРІРѕР±РѕРґРЅС‹Рµ
 template <class T>
 void output_screen_free(my_container<T> c)
 {
@@ -51,7 +51,7 @@ void output_screen_free(my_container<T> c)
 	{
 		if (c[i].free())
 		{
-			cout << "Запись " << n << endl;
+			cout << "Р—Р°РїРёСЃСЊ " << n << endl;
 			c[i].show_full_data();
 			cout << endl;
 			n++;
@@ -59,7 +59,7 @@ void output_screen_free(my_container<T> c)
 	}
 }
 
-//занятые
+//Р·Р°РЅСЏС‚С‹Рµ
 template <class T>
 void output_screen_busy(my_container<T> c)
 {
@@ -68,7 +68,7 @@ void output_screen_busy(my_container<T> c)
 	{
 		if (!c[i].free())
 		{
-			cout << "Запись " << n << endl;
+			cout << "Р—Р°РїРёСЃСЊ " << n << endl;
 			c[i].show_full_data();
 			cout << endl;
 			n++;
@@ -76,7 +76,7 @@ void output_screen_busy(my_container<T> c)
 	}
 }
 
-//печать одного элемента контейнера
+//РїРµС‡Р°С‚СЊ РѕРґРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РєРѕРЅС‚РµР№РЅРµСЂР°
 template <class T>
 bool print(my_container<T> c, int i)
 {
@@ -88,7 +88,7 @@ bool print(my_container<T> c, int i)
 	return false;
 }
 
-//проверка ввода
+//РїСЂРѕРІРµСЂРєР° РІРІРѕРґР°
 char check_char_cin(char new_correct[])
 {
 	bool ok = false;
@@ -104,7 +104,7 @@ char check_char_cin(char new_correct[])
 		cin >> ch;
 		if (cin.good())
 		{
-			//проверка на пустую строку и лишние символы
+			//РїСЂРѕРІРµСЂРєР° РЅР° РїСѓСЃС‚СѓСЋ СЃС‚СЂРѕРєСѓ Рё Р»РёС€РЅРёРµ СЃРёРјРІРѕР»С‹
 			ok = (strchr(correct, ch) != NULL);
 			cin.ignore(10, '\n');
 			if (ok)
@@ -112,13 +112,13 @@ char check_char_cin(char new_correct[])
 				return ch;
 			}
 		}
-		cout << "Неккоректный ввод." << endl;
+		cout << "РќРµРєРєРѕСЂРµРєС‚РЅС‹Р№ РІРІРѕРґ." << endl;
 		cin.clear();
 
 	} while (!ok);
 }
 
-//проверка ввода
+//РїСЂРѕРІРµСЂРєР° РІРІРѕРґР°
 string check_string_cin(string message)
 {
 	string str;
@@ -135,7 +135,7 @@ string check_string_cin(string message)
 		}
 		if (!ok)
 		{
-			cout << "Неккоректный ввод." << endl;
+			cout << "РќРµРєРєРѕСЂРµРєС‚РЅС‹Р№ РІРІРѕРґ." << endl;
 			cin.clear();
 		}
 	} while (!ok);
@@ -144,7 +144,7 @@ string check_string_cin(string message)
 	return str;
 }
 
-//проверка вводимого интервала < max
+//РїСЂРѕРІРµСЂРєР° РІРІРѕРґРёРјРѕРіРѕ РёРЅС‚РµСЂРІР°Р»Р° < max
 int check_interval(int max)
 {
 	string num;
@@ -162,12 +162,12 @@ int check_interval(int max)
 			{
 				return stoi(num);
 			}
-			if ((num == "c") || (num == "с"))
+			if ((num == "c") || (num == "СЃ"))
 			{
 				return -1;
 			}
 		}
-		cout << "Неккоректный ввод." << endl;
+		cout << "РќРµРєРєРѕСЂРµРєС‚РЅС‹Р№ РІРІРѕРґ." << endl;
 		cin.clear();
 
 	} while (!ok);

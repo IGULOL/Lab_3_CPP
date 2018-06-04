@@ -7,20 +7,20 @@
 #include "time.h"
 using namespace std;
 
-/*Информационная запись о книге, выданной на руки абоненту представляет собой структуру:
-- номер читательского билета,
-- фамилия абонента,
-- дата выдачи,
-- дата возврата,
-- автор,
-- название,
-- год издания,
-- издательство,
-- цена.
-Поиск по полям номер читательского билета, автор, издательство и дата возврата (просроченные).
+/*РРЅС„РѕСЂРјР°С†РёРѕРЅРЅР°СЏ Р·Р°РїРёСЃСЊ Рѕ РєРЅРёРіРµ, РІС‹РґР°РЅРЅРѕР№ РЅР° СЂСѓРєРё Р°Р±РѕРЅРµРЅС‚Сѓ РїСЂРµРґСЃС‚Р°РІР»СЏРµС‚ СЃРѕР±РѕР№ СЃС‚СЂСѓРєС‚СѓСЂСѓ:
+- РЅРѕРјРµСЂ С‡РёС‚Р°С‚РµР»СЊСЃРєРѕРіРѕ Р±РёР»РµС‚Р°,
+- С„Р°РјРёР»РёСЏ Р°Р±РѕРЅРµРЅС‚Р°,
+- РґР°С‚Р° РІС‹РґР°С‡Рё,
+- РґР°С‚Р° РІРѕР·РІСЂР°С‚Р°,
+- Р°РІС‚РѕСЂ,
+- РЅР°Р·РІР°РЅРёРµ,
+- РіРѕРґ РёР·РґР°РЅРёСЏ,
+- РёР·РґР°С‚РµР»СЊСЃС‚РІРѕ,
+- С†РµРЅР°.
+РџРѕРёСЃРє РїРѕ РїРѕР»СЏРј РЅРѕРјРµСЂ С‡РёС‚Р°С‚РµР»СЊСЃРєРѕРіРѕ Р±РёР»РµС‚Р°, Р°РІС‚РѕСЂ, РёР·РґР°С‚РµР»СЊСЃС‚РІРѕ Рё РґР°С‚Р° РІРѕР·РІСЂР°С‚Р° (РїСЂРѕСЃСЂРѕС‡РµРЅРЅС‹Рµ).
 */
 
-//тип дата
+//С‚РёРї РґР°С‚Р°
 struct date
 {
 	int day;   //dd
@@ -41,7 +41,7 @@ struct date
 		year = y;
 	}
 
-	//сбросить дату
+	//СЃР±СЂРѕСЃРёС‚СЊ РґР°С‚Сѓ
 	void reset()
 	{
 		day = 1;
@@ -52,15 +52,15 @@ struct date
 	void get_data()
 	{
 		do {
-			cout << "день: ";
+			cout << "РґРµРЅСЊ: ";
 			cin >> day;
 		} while ((day > 31) || (day < 1));
 		do {
-			cout << "номер месяца: ";
+			cout << "РЅРѕРјРµСЂ РјРµСЃСЏС†Р°: ";
 			cin >> month;
 		} while ((month > 12) || (month < 1));
 		do {
-			cout << "год: ";
+			cout << "РіРѕРґ: ";
 			cin >> year;
 		} while (year < 1970);
 	}
@@ -70,7 +70,7 @@ struct date
 		cout << day << "." << month << "." << year << endl;
 	}
 
-	//файловый ввод
+	//С„Р°Р№Р»РѕРІС‹Р№ РІРІРѕРґ
 	friend ifstream& operator >> (ifstream& is, date& d)
 	{
 		string str;
@@ -92,14 +92,14 @@ struct date
 
 	bool operator> (date d2) const
 	{
-		//если года не равны
+		//РµСЃР»Рё РіРѕРґР° РЅРµ СЂР°РІРЅС‹
 		if (!(year == d2.year))
 		{
 			return ((year > d2.year));
 		}
 		else
 		{
-			//если месяцы не равны
+			//РµСЃР»Рё РјРµСЃСЏС†С‹ РЅРµ СЂР°РІРЅС‹
 			if (!(month == d2.month))
 			{
 				return ((month > d2.month));
@@ -112,14 +112,14 @@ struct date
 	}
 	bool operator< (date d2) const
 	{
-		//если года не равны
+		//РµСЃР»Рё РіРѕРґР° РЅРµ СЂР°РІРЅС‹
 		if (!(year == d2.year))
 		{
 			return ((year < d2.year));
 		}
 		else
 		{
-			//если месяцы не равны
+			//РµСЃР»Рё РјРµСЃСЏС†С‹ РЅРµ СЂР°РІРЅС‹
 			if (!(month == d2.month))
 			{
 				return ((month < d2.month));
@@ -132,19 +132,19 @@ struct date
 	}
 };
 
-//структура книга
+//СЃС‚СЂСѓРєС‚СѓСЂР° РєРЅРёРіР°
 class book
 {
 public:
-	char number_of_ticket[40];    //номер читательского билета 
-	char surname[40];			    //фамилия абонента
-	date date_beg; 	//дата выдачи
-	date date_end; 	//дата возврата
-	char author[40];	//автор
-	char title[40];	//название
-	int year_public; //год издания
-	char office_publice[40];      //издательство
-	int money;   //цена
+	char number_of_ticket[40];    //РЅРѕРјРµСЂ С‡РёС‚Р°С‚РµР»СЊСЃРєРѕРіРѕ Р±РёР»РµС‚Р° 
+	char surname[40];			    //С„Р°РјРёР»РёСЏ Р°Р±РѕРЅРµРЅС‚Р°
+	date date_beg; 	//РґР°С‚Р° РІС‹РґР°С‡Рё
+	date date_end; 	//РґР°С‚Р° РІРѕР·РІСЂР°С‚Р°
+	char author[40];	//Р°РІС‚РѕСЂ
+	char title[40];	//РЅР°Р·РІР°РЅРёРµ
+	int year_public; //РіРѕРґ РёР·РґР°РЅРёСЏ
+	char office_publice[40];      //РёР·РґР°С‚РµР»СЊСЃС‚РІРѕ
+	int money;   //С†РµРЅР°
 
 	
 	book()
@@ -163,29 +163,29 @@ public:
 	void get_data()
 	{
 		do {
-			cout << "Введите автора: ";
+			cout << "Р’РІРµРґРёС‚Рµ Р°РІС‚РѕСЂР°: ";
 			cin >> author;
 		} while (strcmp(author, "") == 0);
 		_tolower_ch_(surname);
 		do {
-			cout << "Введите название: ";
+			cout << "Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ: ";
 			cin >> title;
 		} while (strcmp(title, "") == 0);
 		_tolower_ch_(surname);
 
 		do {
-			cout << "Введите год издания: ";
+			cout << "Р’РІРµРґРёС‚Рµ РіРѕРґ РёР·РґР°РЅРёСЏ: ";
 			cin >> year_public;
 		} while ((year_public < 1970) || (year_public > 2018));
 
 		do {
-			cout << "Введите издательство: ";
+			cout << "Р’РІРµРґРёС‚Рµ РёР·РґР°С‚РµР»СЊСЃС‚РІРѕ: ";
 			cin >> office_publice;
 		} while (strcmp(office_publice, "") == 0);
 		_tolower_ch_(surname);
 
 		do {
-			cout << "Введите цену: ";
+			cout << "Р’РІРµРґРёС‚Рµ С†РµРЅСѓ: ";
 			cin >> money;
 		} while (money <= 0);
 
@@ -193,34 +193,34 @@ public:
 
 	void show_data()
 	{
-		cout << "Автор: " << author << endl;
-		cout << "Название: " << title << endl;
-		cout << "Год издания: " << year_public << endl;
-		cout << "Издательство: " << office_publice << endl;
+		cout << "РђРІС‚РѕСЂ: " << author << endl;
+		cout << "РќР°Р·РІР°РЅРёРµ: " << title << endl;
+		cout << "Р“РѕРґ РёР·РґР°РЅРёСЏ: " << year_public << endl;
+		cout << "РР·РґР°С‚РµР»СЊСЃС‚РІРѕ: " << office_publice << endl;
 	}
 
 	void show_full_data()
 	{
-		cout << "Номер студбилета: " << number_of_ticket << endl;
-		cout << "Читатель: " << surname << endl;
-		cout << "Дата выдачи: ";
+		cout << "РќРѕРјРµСЂ СЃС‚СѓРґР±РёР»РµС‚Р°: " << number_of_ticket << endl;
+		cout << "Р§РёС‚Р°С‚РµР»СЊ: " << surname << endl;
+		cout << "Р”Р°С‚Р° РІС‹РґР°С‡Рё: ";
 		date_beg.show_data();
-		cout << "Дата Возврата: ";
+		cout << "Р”Р°С‚Р° Р’РѕР·РІСЂР°С‚Р°: ";
 		date_end.show_data();
-		cout << "Автор: " << author << endl;
-		cout << "Название: " << title << endl;
-		cout << "Год издания: " << year_public << endl;
-		cout << "Издательство: " << office_publice << endl;
-		cout << "Цена: " << money << endl;
+		cout << "РђРІС‚РѕСЂ: " << author << endl;
+		cout << "РќР°Р·РІР°РЅРёРµ: " << title << endl;
+		cout << "Р“РѕРґ РёР·РґР°РЅРёСЏ: " << year_public << endl;
+		cout << "РР·РґР°С‚РµР»СЊСЃС‚РІРѕ: " << office_publice << endl;
+		cout << "Р¦РµРЅР°: " << money << endl;
 	}
 					
-	//свободна ли книга
+	//СЃРІРѕР±РѕРґРЅР° Р»Рё РєРЅРёРіР°
 	bool free()
 	{
 		return (strcmp(number_of_ticket,"0") == 0);
 	}
 
-	//сбросить читателя
+	//СЃР±СЂРѕСЃРёС‚СЊ С‡РёС‚Р°С‚РµР»СЏ
 	void reset()
 	{
 		strcpy(number_of_ticket, "0");
@@ -229,7 +229,7 @@ public:
 		date_end = date(1, 1, 1970);
 	}
 
-	//установить читателя книги на срок days
+	//СѓСЃС‚Р°РЅРѕРІРёС‚СЊ С‡РёС‚Р°С‚РµР»СЏ РєРЅРёРіРё РЅР° СЃСЂРѕРє days
 	bool set_reader(char r_num[], char surn[], int days)
 	{
 		if (free())
@@ -239,12 +239,12 @@ public:
 
 			time_t t = time(NULL);
 			tm *tk;
-			//преобразует время в структуру
+			//РїСЂРµРѕР±СЂР°Р·СѓРµС‚ РІСЂРµРјСЏ РІ СЃС‚СЂСѓРєС‚СѓСЂСѓ
 			tk = localtime(&t);
 			date_beg = date(tk->tm_mday, 1 + tk->tm_mon, 1900 + tk->tm_year);
 
 			tk->tm_mday += days;
-			//обратное преобразование даты
+			//РѕР±СЂР°С‚РЅРѕРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РґР°С‚С‹
 			time_t next = mktime(tk);
 			tk = localtime(&next);
 			date_end = date(tk->tm_mday, 1 + tk->tm_mon, 1900 + tk->tm_year);
